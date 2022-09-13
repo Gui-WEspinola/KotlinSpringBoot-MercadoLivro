@@ -1,46 +1,45 @@
 package com.mercadolivro.controller
 
-import com.mercadolivro.controller.request.PostCostumerRequest
-import com.mercadolivro.controller.request.PutCostumerRequest
-import com.mercadolivro.model.CostumerModel
-import com.mercadolivro.service.CostumerService
-import org.springframework.beans.factory.annotation.Autowired
+import com.mercadolivro.controller.extension.toCustomerModel
+import com.mercadolivro.controller.request.PostCustomerRequest
+import com.mercadolivro.controller.request.PutCustomerRequest
+import com.mercadolivro.model.CustomerModel
+import com.mercadolivro.service.CustomerService
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
-import kotlin.math.cos
 
 @RestController
 @RequestMapping("costumer")
 class CostumerController(
-    val costumerService : CostumerService //forma de fazer injeção de dependência no Kotlin
+    val customerService : CustomerService //forma de fazer injeção de dependência no Kotlin
 ) {
 
     @GetMapping
-    fun getAll(@RequestParam name: String?): List<CostumerModel> {
-        return costumerService.getAll(name)
+    fun getAll(@RequestParam name: String?): List<CustomerModel> {
+        return customerService.getAll(name)
     }
 
     @GetMapping("/{id}")
-    fun getById(@PathVariable id: String): CostumerModel {
-        return costumerService.getById(id)
+    fun getById(@PathVariable id: String): CustomerModel {
+        return customerService.getById(id)
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun create(@RequestBody costumer: PostCostumerRequest) {
-        costumerService.create(costumer)
+    fun create(@RequestBody costumer: PostCustomerRequest) {
+        customerService.create(costumer.toCustomerModel())
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    fun update(@PathVariable id: String, @RequestBody costumer: PutCostumerRequest) {
-        costumerService.update(id, costumer)
+    fun update(@PathVariable id: String, @RequestBody customer: PutCustomerRequest) {
+        customerService.update(customer.toCustomerModel(id))
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: String) {
-        costumerService.delete(id)
+        customerService.delete(id)
     }
 
 }
