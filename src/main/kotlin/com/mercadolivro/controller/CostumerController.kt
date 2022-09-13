@@ -1,6 +1,7 @@
 package com.mercadolivro.controller
 
 import com.mercadolivro.controller.request.PostCostumerRequest
+import com.mercadolivro.controller.request.PutCostumerRequest
 import com.mercadolivro.model.CostumerModel
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -34,4 +35,20 @@ class CostumerController {
 
         costumers.add(CostumerModel(id, costumer.name, costumer.email))
     }
+
+    @PutMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) //response status padrão para PUT e PATCH
+    fun update(@PathVariable id: String, @RequestBody costumer: PutCostumerRequest) {
+        costumers.filter { it.id == id }.first().let {
+            it.name = costumer.name
+            it.email = costumer.email
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT) //response status padrão para PUT e PATCH
+    fun delete(@PathVariable id: String) {
+        costumers.removeIf { it.id == id }
+    }
+
 }
