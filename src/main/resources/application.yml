@@ -17,3 +17,6 @@ spring:
   output:
     ansi:
       enabled: ALWAYS
+
+  jackson:
+    default-property-inclusion: non_null
