@@ -20,3 +20,7 @@ spring:
 
   jackson:
     default-property-inclusion: non_null
+
+  mvc:
+    pathmatch:
+      matching-strategy: ant-path-matcher #pra funcionar o swagger
