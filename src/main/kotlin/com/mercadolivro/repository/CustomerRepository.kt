@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository
 interface CustomerRepository : CrudRepository<CustomerModel, Int>{
 
     fun findByNameContaining(nome: String): List<CustomerModel>
+    fun existsByEmail(email: String): Boolean
+
 }
