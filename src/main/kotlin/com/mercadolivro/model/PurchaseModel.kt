@@ -22,12 +22,12 @@ data class PurchaseModel (
     val books: List<BookModel>, //aqui as tabelas serão criadas tomando como referência
 
     @Column
-    val nfe: String,
+    val nfe: String? = null,
 
     @Column
     val price:BigDecimal,
 
     @Column(name = "created_at")
-    val createdAt: LocalDateTime
+    val createdAt: LocalDateTime = LocalDateTime.now()
 
 )
