@@ -19,7 +19,7 @@ data class PurchaseModel (
     @JoinTable(name = "purchase_book",
         joinColumns = [JoinColumn(name = "purchase_id")],
         inverseJoinColumns = [JoinColumn(name = "book_id")])
-    val books: List<BookModel>, //aqui as tabelas serão criadas tomando como referência
+    val books: MutableList<BookModel>, //aqui as tabelas serão criadas tomando como referência
 
     @Column
     val nfe: String? = null,

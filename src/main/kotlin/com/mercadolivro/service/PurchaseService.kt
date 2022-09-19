@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class PurchaseService(
-    private val purchaseRepository: PurchaseRepository
+    private val purchaseRepository: PurchaseRepository,
     private val applicationEventPublisher: ApplicationEventPublisher
 ) {
 
@@ -16,6 +16,10 @@ class PurchaseService(
         purchaseRepository.save(purchaseModel)
 
         applicationEventPublisher.publishEvent(PurchaseEvent(this, purchaseModel))
+    }
+
+    fun update(purchaseModel: PurchaseModel)  {
+        purchaseRepository.save(purchaseModel)
     }
 
 

@@ -1,6 +1,7 @@
 package com.mercadolivro.controller.mapper
 
 import com.mercadolivro.controller.request.PostPurchaseRequest
+import com.mercadolivro.model.BookModel
 import com.mercadolivro.model.PurchaseModel
 import com.mercadolivro.service.BookService
 import com.mercadolivro.service.CustomerService
@@ -18,7 +19,7 @@ class PurchaseMapper(
 
         return PurchaseModel(
             customer = customer,
-            books = books,
+            books = books.toMutableList(),
             price = books.sumOf { it.price }
         )
     }
