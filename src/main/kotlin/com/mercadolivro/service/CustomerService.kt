@@ -2,9 +2,11 @@ package com.mercadolivro.service
 
 import com.mercadolivro.enums.CustomerStatus
 import com.mercadolivro.enums.Errors
+import com.mercadolivro.enums.Profiles
 import com.mercadolivro.exception.NotFoundException
 import com.mercadolivro.model.CustomerModel
 import com.mercadolivro.repository.CustomerRepository
+import org.springframework.context.annotation.Profile
 import org.springframework.stereotype.Service
 
 @Service
@@ -27,7 +29,10 @@ class CustomerService(
     }
 
     fun create(customer: CustomerModel) {
-           customerRepository.save(customer)
+        val customerCopy = customer.copy(
+            roles = setOf(Profiles.CUSTOMER)
+        )
+        customerRepository.save(customerCopy)
     }
 
     fun update(customer: CustomerModel) {
