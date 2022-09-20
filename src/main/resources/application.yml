@@ -24,3 +24,7 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant-path-matcher #pra funcionar o swagger
+
+jwt:
+  secret: 95bdf312-e9ca-4818-a94c-dc9c95f2cb5a
+  expiration: 999999
